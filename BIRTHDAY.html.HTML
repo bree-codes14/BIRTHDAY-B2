@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For B2 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #ffe6f0, #fff);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+#intro {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+#main {
+  display: none;
+  padding: 20px;
+}
+
+h1 {
+  color: #ff3366;
+}
+
+.message {
+  max-width: 600px;
+  margin: 20px auto;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #444;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow: hidden;
+  border-right: 2px solid #ff3366;
+  width: 0;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.gallery img {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 12px;
+  margin: 10px;
+}
+
+/* Balloons */
+.balloon {
+  position: fixed;
+  bottom: -100px;
+  width: 40px;
+  height: 60px;
+  border-radius: 50%;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-120vh);}
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: red;
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  0% {transform: translateY(-10px);}
+  100% {transform: translateY(100vh);}
+}
+
+/* Mobile adjustments */
+@media(max-width: 500px){
+  .gallery img { width: 90%; max-width: 250px; }
+  .message { font-size: 16px; }
+  h1 { font-size: 30px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <h2>This is a safe link 😭</h2>
+  <p>I promise I'm not here to hack you…</p>
+  <p>love you 💖</p>
+  <button onclick="start()">Click here for a surprise</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+<h1>🎉 Happy Birthday, B2 🎉</h1>
+<div class="message" id="birthdayMessage">
+I know you don’t really celebrate your birthday like that, but I couldn’t let today pass without saying this…  
+
+I’m really glad you were born.  
+The world became a little better the day you came into it, and I truly mean that.  
+
+You might not see this day as something special, but to me it is — because it gave me you.  
+And I’m genuinely grateful that you exist, and that somehow, our paths crossed.  
+
+You matter more than you probably think… and I hope one day you see yourself the way I see you 💖  
+
+I just wish I could be there with you today,  
+but for now… I hope the waves of Chicago will bring you to me soon 🌊💖  
+
+And maybe this is just me saying 831 in my own way…  
+I hope you figure that out.  
+</div>
+
+<div class="gallery">
+  <img src="https://images.unsplash.com/photo-1601758123927-5d67f00fabc7?auto=format&fit=crop&w=600&q=80" alt="Birthday Image 1">
+  <img src="https://images.unsplash.com/photo-1592847802680-520f39c33b42?auto=format&fit=crop&w=600&q=80" alt="Birthday Image 2">
+</div>
+
+<h2 id="endMessage" style="display:none;">I hope you enjoyed your surprise 💖</h2>
+
+</div>
+
+<!-- Audio -->
+<audio id="popSound" src="https://freesound.org/data/previews/175/175192_2394245-lq.mp3"></audio> <!-- louder pop -->
+<audio id="beatSong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+<script>
+function start() {
+  // Play loud pop sound
+  let pop = document.getElementById("popSound");
+  pop.volume = 1; // full volume
+  pop.play();
+
+  // Show main content
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("main").style.display = "block";
+
+  // Balloons
+  for(let i=0;i<10;i++){
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.style.left=Math.random()*100+"vw";
+    b.style.background="hsl("+Math.random()*360+",80%,70%)";
+    b.style.animationDuration = (5 + Math.random()*5) + "s";
+    document.body.appendChild(b);
+  }
+
+  // Confetti
+  for(let i=0;i<50;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background = `hsl(${Math.random()*360}, 80%, 60%)`;
+    c.style.animationDuration = (3 + Math.random()*5) + "s";
+    document.body.appendChild(c);
+  }
+
+  // Play beat song slightly after pop
+  setTimeout(() => {
+    document.getElementById("beatSong").play();
+    typeMessage();
+  }, 500);
+}
+
+// Typing effect for the birthday message
+function typeMessage() {
+  const messageEl = document.getElementById("birthdayMessage");
+  const fullText = messageEl.textContent;
+  messageEl.textContent = "";
+  let i = 0;
+  const interval = setInterval(() => {
+    messageEl.textContent += fullText.charAt(i);
+    i++;
+    if(i >= fullText.length){
+      clearInterval(interval);
+      document.getElementById("endMessage").style.display = "block";
+    }
+  }, 20); // typing speed
+}
+</script>
+
+</body>
+</html>
